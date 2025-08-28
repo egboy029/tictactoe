@@ -1,7 +1,8 @@
 'use client';
 
 import { GameState, getGameStatus } from '@/lib/gameLogic';
-import { GameMode, Difficulty } from '@/hooks/useGame';
+import { GameMode } from '@/hooks/useGame';
+import { Difficulty } from '@/lib/aiLogic';
 
 interface GameInfoProps {
   gameState: GameState;
