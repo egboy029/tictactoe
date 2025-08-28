@@ -1,6 +1,6 @@
 'use client';
 
-import { CellValue, Player } from '@/lib/gameLogic';
+import { CellValue } from '@/lib/gameLogic';
 import { cn } from '@/lib/utils';
 
 interface CellProps {

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
-import { GameState, Player, updateGameState, resetGame, undoMove, initializeGame } from '@/lib/gameLogic';
+import { GameState, updateGameState, resetGame, undoMove, initializeGame } from '@/lib/gameLogic';
 import { Difficulty, getAIMoveWithDelay } from '@/lib/aiLogic';
 
 export type GameMode = 'pvp' | 'pve';
@@ -38,11 +38,27 @@ export const useGame = (): UseGameReturn => {
       
       getAIMoveWithDelay(gameState.board, aiDifficulty, aiPlayer, delay)
         .then((move) => {
-          handleMove(move);
+          if (gameState.board[move] === null && !gameState.winner && !gameState.isDraw) {
+            const newGameState = updateGameState(gameState, move);
+            setGameState(newGameState);
+
+            // Update scores if game ended
+            if (newGameState.winner) {
+              setScores(prev => ({
+                ...prev,
+                [newGameState.winner!]: prev[newGameState.winner!] + 1
+              }));
+            }
+
+            // Trigger AI turn if in PvE mode and game isn't over
+            if (gameMode === 'pve' && !newGameState.winner && !newGameState.isDraw) {
+              setIsAITurn(true);
+            }
+          }
           setIsAITurn(false);
         });
     }
-  }, [isAITurn, gameMode, gameState.board, gameState.currentPlayer, gameState.winner, gameState.isDraw, aiDifficulty]);
+  }, [isAITurn, gameMode, gameState, aiDifficulty]);
 
   // Handle move logic
   const handleMove = useCallback((index: number) => {

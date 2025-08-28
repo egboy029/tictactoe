@@ -1,10 +1,10 @@
 'use client';
 
-import { getWinningCombination } from '@/lib/gameLogic';
+import { getWinningCombination, Board as BoardType } from '@/lib/gameLogic';
 import { Cell } from './Cell';
 
 interface BoardProps {
-  board: (string | null)[];
+  board: BoardType;
   isAITurn: boolean;
   onCellClick: (index: number) => void;
 }

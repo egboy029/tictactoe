@@ -18,7 +18,6 @@ export const TicTacToe = () => {
     undoMove,
     setGameMode,
     setAIDifficulty,
-    setPlayerNames,
     resetScores,
   } = useGame();
 

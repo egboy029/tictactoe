@@ -1,4 +1,4 @@
-import { Board, Player, CellValue, getAvailableMoves, checkWinner, checkDraw } from './gameLogic';
+import { Board, Player, getAvailableMoves, checkWinner, checkDraw } from './gameLogic';
 
 export type Difficulty = 'easy' | 'medium' | 'hard';
 
