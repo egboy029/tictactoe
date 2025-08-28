@@ -1,6 +1,7 @@
 'use client';
 
-import { GameMode, Difficulty } from '@/hooks/useGame';
+import { GameMode } from '@/hooks/useGame';
+import { Difficulty } from '@/lib/aiLogic';
 
 interface GameControlsProps {
   onResetGame: () => void;
